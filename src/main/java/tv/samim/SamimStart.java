@@ -3,6 +3,11 @@ package tv.samim;
 import tv.samim.module1.ModuleOneLogger;
 import tv.samim.module2.ModuleTwoLogger;
 
+/**
+ * This is the Main class that runs all logger classes.
+ *
+ * @author mh.saffari
+ */
 public class SamimStart {
 
     protected final static SamimLogger LOGGER = SamimLogger.INSTANCE;

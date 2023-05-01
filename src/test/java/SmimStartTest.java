@@ -17,6 +17,9 @@ public class SmimStartTest {
     public ProcessEngineLoggingRule loggingRule = new ProcessEngineLoggingRule()
             .watch(MODULE_ONE_LOGGER, Level.ERROR);
 
+    /**
+     * Contains logs with level info and higher in {@link SAMIM_LOGGER} package and logs with level error in {@link MODULE_ONE_LOGGER} package.
+     */
     @Test
     @WatchLogger(loggerNames = SAMIM_LOGGER, level = "INFO")
     public void samimStartTest() {
@@ -27,11 +30,14 @@ public class SmimStartTest {
             throw new RuntimeException(e);
         }
 
-        assertThat(loggingRule.getFilteredLog(SAMIM_LOGGER, "SamimMain").size()).isEqualTo(1);
-        assertThat(loggingRule.getFilteredLog(SAMIM_LOGGER, "Exception").size()).isEqualTo(1);
-        assertThat(loggingRule.getFilteredLog(MODULE_ONE_LOGGER, "Exception").size()).isEqualTo(1);
+        assertThat(loggingRule.getFilteredLog(SAMIM_LOGGER, "Start Samim").size()).isEqualTo(1);
+        assertThat(loggingRule.getFilteredLog(SAMIM_LOGGER, "Samim exception").size()).isEqualTo(1);
+        assertThat(loggingRule.getFilteredLog(MODULE_ONE_LOGGER, "ModuleOne exception").size()).isEqualTo(1);
     }
 
+    /**
+     * Contains logs with level error in {@link MODULE_ONE_LOGGER} package.
+     */
     @Test
     public void moduleOneStartTest() {
 
@@ -41,9 +47,12 @@ public class SmimStartTest {
             throw new RuntimeException(e);
         }
 
-        assertThat(loggingRule.getFilteredLog(MODULE_ONE_LOGGER, "Exception").size()).isEqualTo(1);
+        assertThat(loggingRule.getFilteredLog(MODULE_ONE_LOGGER, "ModuleOne exception").size()).isEqualTo(1);
     }
 
+    /**
+     * Contains logs with level debug and higher in {@link MODULE_TWO_LOGGER} package and logs with level error in {@link MODULE_ONE_LOGGER} package.
+     */
     @Test
     @WatchLogger(loggerNames = MODULE_TWO_LOGGER, level = "DEBUG")
     public void moduleTwoStartTest() {
@@ -54,9 +63,9 @@ public class SmimStartTest {
             throw new RuntimeException(e);
         }
 
-        assertThat(loggingRule.getFilteredLog(MODULE_TWO_LOGGER, "SamimMainForModuleTwo").size()).isEqualTo(1);
-        assertThat(loggingRule.getFilteredLog(MODULE_TWO_LOGGER, "Exception").size()).isEqualTo(1);
-        assertThat(loggingRule.getFilteredLog(MODULE_TWO_LOGGER, "Finish").size()).isEqualTo(1);
-        assertThat(loggingRule.getFilteredLog(MODULE_ONE_LOGGER, "Exception").size()).isEqualTo(1);
+        assertThat(loggingRule.getFilteredLog(MODULE_TWO_LOGGER, "Start ModuleTwo").size()).isEqualTo(1);
+        assertThat(loggingRule.getFilteredLog(MODULE_TWO_LOGGER, "ModuleTwo exception").size()).isEqualTo(1);
+        assertThat(loggingRule.getFilteredLog(MODULE_TWO_LOGGER, "Finish ModuleTwo").size()).isEqualTo(1);
+        assertThat(loggingRule.getFilteredLog(MODULE_ONE_LOGGER, "ModuleOne exception").size()).isEqualTo(1);
     }
 }

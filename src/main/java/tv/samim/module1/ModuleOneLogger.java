@@ -4,18 +4,18 @@ import tv.samim.SamimLogger;
 
 public class ModuleOneLogger extends SamimLogger {
 
-    public ModuleOneLogger(){
+    public ModuleOneLogger() {
     }
 
-    public void startModuleOne(String startName){
+    public void startModuleOne(String startName) {
         this.logInfo("001", "Start ModuleOne with name: {} ", startName);
     }
 
-    public void exceptionWhileStartModuleOne(Exception e){
-        this.logError("002", "Exception while starting ModuleOne: {}", e);
+    public void exceptionWhileStartModuleOne(Exception e) {
+        this.logError("002", "ModuleOne exception while starting ModuleOne: {}", e);
     }
 
-    public void finishModuleOne(){
+    public void finishModuleOne() {
         this.logDebug("003", "Finish ModuleOne.", new Object());
     }
 }
